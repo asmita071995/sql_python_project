@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from api import new_api  # Ensure this imports the correct module
-
+from read_data import read
 # Create a Flask application instance
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ def insert_data():
 def read_data():
     try:
         # Call the function from new_api to read data from the database
-        data = new_api.sql_func()  # Ensure this function is for reading data
+        data = read.read()  # Ensure this function is for reading data
         return jsonify({"data": data})
 
     except Exception as e:
