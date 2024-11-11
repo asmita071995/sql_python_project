@@ -1,0 +1,10 @@
+df = pd.read_csv('/home/dhyanendra/Downloads/titanic/tested.csv')
+
+data = df.to_json(orient='records')
+
+with open ('output.json','w') as file:
+    file.write(data)
+
+print('csv successfully converted to json ') 
+
+data= pd.read_json('output.json')

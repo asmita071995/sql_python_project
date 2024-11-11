@@ -1,13 +1,23 @@
-# config.py
+# flask configuration
+from os import environ, path
 from dotenv import load_dotenv
-import os
-from sqlalchemy import create_engine
 
-# Load environment variables from the .env file
-load_dotenv()
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv(path.join(basedir, '.env'))
 
-# Store variables as constants
-username = os.getenv("username")
-password = os.getenv("password")
-host = os.getenv("host")
-database = os.getenv("database")
+
+class Config:
+    """base config"""
+    API_KEY = environ.get("API_KEY")
+    
+
+class ProdConfig(Config):
+    FLASK_ENV = "production"
+    DEBUG = False
+    TESTING = False
+
+
+class DevConfig(Config):
+    FLASK_ENV = "development"
+    DEBUG = True
+    TESTING = True
